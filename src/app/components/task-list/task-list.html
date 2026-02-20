@@ -35,9 +35,10 @@
             <div class="flex-1">
               <h3
                 class="text-lg font-semibold"
-                [class.line-through]="task.completed"
-                [class.text-gray-500]="task.completed"
-                [class.text-gray-900]="!task.completed"
+                [ngClass]="{
+                  'line-through text-gray-500': task.completed,
+                  'text-gray-900': !task.completed
+                }"
               >
                 {{ task.title }}
               </h3>
@@ -45,8 +46,11 @@
               @if (task.description) {
                 <p
                   class="text-sm mt-1"
-                  [class.text-gray-400]="task.completed"
-                  [class.text-gray-600]="!task.completed"
+                  [ngClass]="{
+                    'text-sm mt-1': true,
+                    'text-gray-400': task.completed,
+                    'text-gray-600': !task.completed
+                  }"
                 >
                   {{ task.description }}
                 </p>

@@ -3,13 +3,7 @@
     @for (filter of filters; track filter.value) {
       <button
         (click)="onFilterChange(filter.value)"
-        class="px-6 py-2 rounded-lg font-medium transition duration-200"
-        [class.bg-blue-600]="isActive(filter.value)"
-        [class.text-white]="isActive(filter.value)"
-        [class.hover:bg-blue-700]="isActive(filter.value)"
-        [class.bg-gray-100]="!isActive(filter.value)"
-        [class.text-gray-700]="!isActive(filter.value)"
-        [class.hover:bg-gray-200]="!isActive(filter.value)"
+        [class]="getButtonClasses(filter.value)"
       >{{ filter.label }}</button>
     }
   </div>

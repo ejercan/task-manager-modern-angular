@@ -29,4 +29,12 @@ export class TaskFilters {
   isActive(filter: FilterType): boolean {
     return this.currentFilter() === filter;
   }
+
+  getButtonClasses(filter: FilterType): string {
+    const baseClasses = 'px-6 py-2 rounded-lg font-medium transition duration-200 cursor-pointer';
+    const activeClasses = 'bg-blue-600 text-white hover:bg-blue-700';
+    const inactiveClasses = 'bg-gray-100 text-gray-700 hover:bg-gray-200';
+
+    return `${baseClasses} ${this.isActive(filter) ? activeClasses : inactiveClasses}`
+  }
 }

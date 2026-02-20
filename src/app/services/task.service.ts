@@ -14,7 +14,7 @@ export class TaskService {
     const tasks = this.tasksSignal();
     const filter = this.filterSignal();
 
-    switch(filter) {
+    switch (filter) {
       case 'active':
         return tasks.filter((task) => !task.completed);
       case 'completed':
@@ -28,6 +28,21 @@ export class TaskService {
     return this.tasksSignal().filter((task) => !task.completed).length;
   });
 
+  // Additional stats
+  completedTaskCount = computed(() => this.tasksSignal().filter(task => task.completed).length);
+  totalTaskCount = computed(() => this.tasksSignal().length);
+  completionRate = computed(() => {
+    const total = this.totalTaskCount();
+
+    if (total === 0) {
+      return 0;
+    }
+
+    const completed = this.completedTaskCount();
+
+    return Math.round((completed / total) * 100);
+  });
+
   currentFilter = this.filterSignal.asReadonly();
 
   constructor() {
@@ -36,7 +51,7 @@ export class TaskService {
   }
 
   // ACTIONS (public methods)
-  addTask(title: string, description: string):void {
+  addTask(title: string, description: string): void {
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
@@ -52,7 +67,7 @@ export class TaskService {
   toggleTask(id: string): void {
     this.tasksSignal.update((tasks) => {
       return tasks.map((task) => {
-        return task.id === id ? {...task, completed: !task.completed} : task
+        return task.id === id ? { ...task, completed: !task.completed } : task
       });
     });
 
