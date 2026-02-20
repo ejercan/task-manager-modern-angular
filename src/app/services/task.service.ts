@@ -25,7 +25,7 @@ export class TaskService {
   });
 
   activeTasksCount = computed(() => {
-    return this.tasksSignal().filter((task) => task.completed).length;
+    return this.tasksSignal().filter((task) => !task.completed).length;
   });
 
   currentFilter = this.filterSignal.asReadonly();
