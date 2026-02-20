@@ -18,7 +18,7 @@
     <div class="space-y-4">
       @for (task of tasks(); track task.id) {
         <div
-          class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+          class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition fade-in"
           [class.bg-gray-50]="task.completed"
         >
           <!-- Task Header -->
@@ -27,21 +27,22 @@
             <input
               type="checkbox"
               [checked]="task.completed"
+              [id]="`task-${task.id}`"
               (change)="onToggleTask(task.id)"
-              class="mt-1 w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+              class="mt-1 w-5 h-5 text-blue-600 rounded focus:border-none cursor-pointer"
             />
 
             <!-- Task Content -->
             <div class="flex-1">
-              <h3
-                class="text-lg font-semibold"
+              <label [for]="`task-${task.id}`"
+                class="text-lg font-semibold cursor-pointer"
                 [ngClass]="{
                   'line-through text-gray-500': task.completed,
                   'text-gray-900': !task.completed
                 }"
               >
                 {{ task.title }}
-              </h3>
+              </label>
 
               @if (task.description) {
                 <p
