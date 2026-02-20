@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TaskService } from '../../services/task.service';
-import { CommonModule, DatePipe, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-list',
